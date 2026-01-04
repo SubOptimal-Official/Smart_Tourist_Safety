@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Tourist Safety App</title>
+</head>
+<body>
+    <h2>Tourist Safety App</h2>
+    <p><b>Your Tourist ID:</b></p>
+    <p>{{ tourist_id }}</p>
+
+    <button onclick="sendLocation()">Send Location</button>
+    <button onclick="panic()">PANIC</button>
+
+   <script>
+const tourist_id = "{{ tourist_id }}";
+
+function sendLocation() {
+    navigator.geolocation.getCurrentPosition(
+        pos => send(pos.coords.latitude, pos.coords.longitude),
+        () => {
+            send(22.5726, 88.3639); // Kolkata fallback
+            alert("GPS failed, using fallback location");
+        },
+        { enableHighAccuracy: true }
+    );
+}
+
+function send(lat, lng) {
+    fetch("/location", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            tourist_id: tourist_id,
+            lat: lat,
+            lng: lng
+        })
+    });
+}
+</script>
+
+
+</body>
+</html>

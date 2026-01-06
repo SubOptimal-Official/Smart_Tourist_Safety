@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Command Center - Tourist Safety</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="/static/police.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Police Command Center</h1>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="total-tourists">0</span>
+                        <span class="stat-label">Tourists</span>
+                    </div>
+                    <div class="stat-item alert">
+                        <span class="stat-value" id="active-alerts">0</span>
+                        <span class="stat-label">Active Alerts</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="high-risk">0</span>
+                        <span class="stat-label">High Risk</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Map Section -->
+            <div class="map-section">
+                <div class="section-header">
+                    <h2>Live Location Map</h2>
+                    <button id="refresh-btn" class="btn-refresh">Refresh</button>
+                </div>
+                <div id="map" class="map-container"></div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Alerts Section -->
+                <div class="section alerts-section">
+                    <h3>Active SOS Alerts</h3>
+                    <div id="alerts-list" class="alerts-list">
+                        <p class="empty-state">No active alerts</p>
+                    </div>
+                </div>
+
+                <!-- Tourists Section -->
+                <div class="section tourists-section">
+                    <h3>Tourist List</h3>
+                    <div id="tourists-list" class="tourists-list">
+                        <p class="empty-state">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/static/police.js"></script>
+</body>
+</html>

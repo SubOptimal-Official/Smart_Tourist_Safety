@@ -1,44 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tourist Safety App</title>
+    <link rel="stylesheet" href="/static/tourist.css">
 </head>
 <body>
-    <h2>Tourist Safety App</h2>
-    <p><b>Your Tourist ID:</b></p>
-    <p>{{ tourist_id }}</p>
-
-    <button onclick="sendLocation()">Send Location</button>
-    <button onclick="panic()">PANIC</button>
-
-   <script>
-const tourist_id = "{{ tourist_id }}";
-
-function sendLocation() {
-    navigator.geolocation.getCurrentPosition(
-        pos => send(pos.coords.latitude, pos.coords.longitude),
-        () => {
-            send(22.5726, 88.3639); // Kolkata fallback
-            alert("GPS failed, using fallback location");
-        },
-        { enableHighAccuracy: true }
-    );
-}
-
-function send(lat, lng) {
-    fetch("/location", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            tourist_id: tourist_id,
-            lat: lat,
-            lng: lng
-        })
-    });
-}
-</script>
-
-
+    <div class="container">
+        <!-- Registration Form -->
+        <div id="registration-screen" class="screen active">
+            <div class="header">
+                <h1>Tourist Safety Registration</h1>
+                <p>Register to enable location tracking for your safety</p>
+            </div>
+            
+            <form id="registration-form" class="form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="passport">Passport Number</label>
+                    <input type="text" id="passport" name="passport">
+                </div>
+                
+                <div class="form-group">
+                    <label for="hotel">Hotel Name</label>
+                    <input type="text" id="hotel" name="hotel">
+                </div>
+                
+                <div class="form-group">
+                    <label for="emergency">Emergency Contact</label>
+                    <input type="tel" id="emergency" name="emergency">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Register & Enable Tracking</button>
+            </form>
+            
+            <div id="error-message" class="error-message"></div>
+        </div>
+        
+        <!-- Tracking Screen -->
+        <div id="tracking-screen" class="screen">
+            <div class="header">
+                <h1>Safety Tracking Active</h1>
+                <p id="tracking-status">Tracking your location...</p>
+            </div>
+            
+            <div class="status-card">
+                <div class="status-icon">📍</div>
+                <h2>You're Protected</h2>
+                <p>Your location is being shared with local authorities for your safety</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Tourist ID</span>
+                    <span id="tourist-id" class="info-value">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Last Update</span>
+                    <span id="last-update" class="info-value">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">GPS Status</span>
+                    <span id="gps-status" class="info-value">Active</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Location Accuracy</span>
+                    <span id="accuracy" class="info-value">-</span>
+                </div>
+            </div>
+            
+            <button id="sos-button" class="btn btn-sos">
+                <span class="sos-icon">🚨</span>
+                EMERGENCY SOS
+            </button>
+            
+            <div id="sos-message" class="success-message"></div>
+        </div>
+    </div>
+    
+    <script src="/static/tourist.js"></script>
 </body>
 </html>

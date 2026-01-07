@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Portal - Safety App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="back-link">← Back</a>
+            <h1>Tourist Safety Portal</h1>
+            <div class="header-actions">
+                <button id="logout-btn" class="btn btn-secondary">Logout</button>
+            </div>
+        </header>
+        
+        <main class="tourist-portal">
+            <!-- User Info Card -->
+            <div class="card info-card">
+                <h3>Your Information</h3>
+                <p><strong>Name:</strong> <span id="user-name"></span></p>
+                <p><strong>Phone:</strong> <span id="user-phone"></span></p>
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+            </div>
+            
+            <!-- Location Status -->
+            <div class="card">
+                <h3>Location Status</h3>
+                <div class="location-status" id="location-status">
+                    <span class="status-indicator"></span>
+                    <span id="location-text">Getting your location...</span>
+                </div>
+            </div>
+            
+            <!-- Alert Buttons -->
+            <div class="alert-buttons-grid">
+                <!-- Emergency SOS Button -->
+                <div class="card alert-button-card sos-card">
+                    <div class="alert-icon">🚨</div>
+                    <h3>Emergency SOS</h3>
+                    <p>Send immediate distress signal to police</p>
+                    <button class="btn btn-sos" data-alert-type="emergency_sos">
+                        Send Emergency Alert
+                    </button>
+                </div>
+                
+                <!-- Location Tracking Button -->
+                <div class="card alert-button-card tracking-card">
+                    <div class="alert-icon">📍</div>
+                    <h3>Location Tracking</h3>
+                    <p>Share your current location with authorities</p>
+                    <button class="btn btn-tracking" data-alert-type="location_tracking">
+                        Share Location
+                    </button>
+                </div>
+                
+                <!-- 24/7 Support Button -->
+                <div class="card alert-button-card support-card">
+                    <div class="alert-icon">🆘</div>
+                    <h3>24/7 Support</h3>
+                    <p>Request assistance from support team</p>
+                    <button class="btn btn-support" data-alert-type="24_7_support">
+                        Request Support
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Alert Success Message -->
+            <div id="alert-sent" class="alert alert-success" style="display: none;">
+                <strong>Alert Sent Successfully!</strong> 
+                <span id="alert-message"></span>
+            </div>
+        </main>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/tourist.js') }}"></script>
+</body>
+</html>

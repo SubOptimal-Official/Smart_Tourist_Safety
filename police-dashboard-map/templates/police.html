@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Dashboard - Safety App</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="back-link">← Back</a>
+            <h1>Police Dashboard</h1>
+            <div class="header-actions">
+                <button id="refresh-btn" class="btn btn-secondary">🔄 Refresh</button>
+            </div>
+        </header>
+        
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card danger-stat">
+                <div class="stat-icon">🚨</div>
+                <div class="stat-content">
+                    <div class="stat-label">Tourists at Risk</div>
+                    <div class="stat-value" id="tourists-at-risk">0</div>
+                </div>
+            </div>
+            <div class="stat-card emergency-stat">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-content">
+                    <div class="stat-label">Emergency SOS</div>
+                    <div class="stat-value" id="emergency-count">0</div>
+                </div>
+            </div>
+        </div>
+        
+        <main class="police-dashboard">
+            <div class="dashboard-grid">
+                <!-- Map Section -->
+                <div class="map-container">
+                    <h2>Live Alert Map</h2>
+                    <div id="map"></div>
+                </div>
+                
+                <!-- Alerts List -->
+                <div class="alerts-container">
+                    <h2>Active Alerts</h2>
+                    <div id="alerts-list" class="alerts-list">
+                        <p class="loading">Loading alerts...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='js/police.js') }}"></script>
+</body>
+</html>
